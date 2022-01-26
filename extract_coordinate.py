@@ -17,7 +17,6 @@ def extract_coordinate(path):
     # 2値化
     retval, bw = cv2.threshold(gray, 50, 255, cv2.THRESH_BINARY)
 
-    cv2.imshow('output', bw)
     # 輪郭を抽出
     #   contours : [領域][Point No][0][x=0, y=1]
     #   cv2.CHAIN_APPROX_NONE: 中間点も保持する
@@ -49,18 +48,19 @@ def extract_coordinate(path):
             detect_count = detect_count + 1
 
             #BGR
-            center = src[int(y+h//2),int(x+w//2)]
-            print(center)
-            if center[0] > center[1]:
+            sum = np.sum(np.sum(src[y:y + h, x:x + w], axis=0), axis=0)
+            print(sum)
+            if sum[0]/sum[1] > 0.5:
                 print("B({},{})".format(x+w/2,y+h/2))
             else:
                 print("G({},{})".format(x+w/2,y+h/2))
+                
 
 
 
 
     # 外接矩形された画像を表示
-    # cv2.imshow('output', src)
+    cv2.imshow('output', src)
     cv2.waitKey(0)
 
     # 終了処理
