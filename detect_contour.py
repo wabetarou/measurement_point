@@ -44,7 +44,7 @@ def detect_contour(path):
       cv2.rectangle(src, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
       # 外接矩形毎に画像を保存
-      cv2.imwrite('image_' + str(detect_count) + '.jpg', src[y:y + h, x:x + w])
+      cv2.imwrite('images/image_' + str(detect_count) + '.jpg', src[y:y + h, x:x + w])
 
       detect_count = detect_count + 1
       print("({},{})".format(x+w/2,y+h/2))
